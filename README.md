@@ -12,3 +12,6 @@ hand_written_levenstein.py	is my realisation of a standard levenshtein algorithm
 levenshtein.py	is my attempt to use existing library Python-Levenshtein.
 
 spell_check with morfessor.py	is an unfinished attempt to use morfessor library to boost spell-checking system perfromance.
+
+# viterbi
+two realizations of a Viterbi algorithm: bigrams and trigrams based
