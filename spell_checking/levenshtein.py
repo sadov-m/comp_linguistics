@@ -35,7 +35,7 @@ with open('2grams-3.txt', encoding='utf-8') as bigram_opener:
 test_strings = []
 with open('test_sample_testset.txt', encoding='utf-8') as strings_opener:
     for i, line in enumerate(strings_opener):
-        if i > 10 and i < 20:
+        if i > 110 and i < 120:
             test_strings.append(line.strip())
 
 print("Elapsed time for loading: {:.3f} sec".format(time.time() - start_time))

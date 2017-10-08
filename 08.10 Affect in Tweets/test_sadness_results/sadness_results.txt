@@ -1,0 +1,11 @@
+﻿All features:
+number of features used is: 21262
+rho-value is: SpearmanrResult(correlation=0.36868939051334021, pvalue=3.6593540487195663e-27)
+rmse is:  0.215026087629
+the score is: 0.183611958282
+
+Feature selection:
+number of features used is: 1715
+rho-value is: SpearmanrResult(correlation=0.35722806035017596, pvalue=1.7274587935547597e-25)
+rmse is:  0.219844785242
+the score is: 0.1466117369

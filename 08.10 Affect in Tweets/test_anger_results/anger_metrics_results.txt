@@ -1,0 +1,32 @@
+﻿All features:
+
+random_forest_tf_idf (by default):
+number of features used is: 21262
+rho-value is: SpearmanrResult(correlation=0.38028265500706765, pvalue=6.3103483738589083e-29)
+rmse is:  0.248634820967
+the score is: -0.017988974193
+
+random_forest_tf_idf n_estimators=120, random_state=1, max_features=25):
+number of features used is: 21262
+rho-value is: SpearmanrResult(correlation=0.40459676898773683, pvalue=7.3084885076423611e-33)
+rmse is:  0.225736314196
+the score is: 0.160883943018
+
+KNeighborsRegressor(n_jobs=-1, weights='distance', n_neighbors=25)
+number of features used is: 21262
+rho-value is: SpearmanrResult(correlation=0.3721713293483474, pvalue=1.099742191570926e-27)
+rmse is:  0.225183333389
+the score is: 0.164990032306
+
+Ridge()
+number of features used is: 21262
+rho-value is: SpearmanrResult(correlation=0.41420382491937696, pvalue=1.6449873193632105e-34)
+rmse is:  0.224746044817
+the score is: 0.168229932649
+
+Feature selection:
+Ridge()
+number of features used is: 1715
+rho-value is: SpearmanrResult(correlation=0.37692389058085568, pvalue=2.0811004663330211e-28)
+rmse is:  0.230829277894
+the score is: 0.122593275996
