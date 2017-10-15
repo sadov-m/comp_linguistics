@@ -1,0 +1,96 @@
+STRUCTURE OF THIS FILE:\
+1. Some insights based on this data
+2. Data
+3. Conclusion
+
+====================================
+1. Some insights based on this data:
+====================================
+
+Positive impacts:
+-date (YYYY-MM-DD) as the value for +1:word.lower() for I-LOC. Though it would be better to make a specific tag for it, not just "CD" (which means digits as far as I understood) so as to make our classifier more stable and generalized conclusion, otherwise I suppose this model might overfit.
+-"v" as the value for -1:word.lower() for I-ORG is nice: due to the fact that training data contained many samples related to football, the model learned that names of teams are separated by "v" which actually means "vs"; probably "v" is a header-specific way to write "vs".
+-the positive impact of "wisc" and "colo" being values of -1:word.lower(): and having frequency equal to 2 in train set is roughly the same as the one of "clinton" being value of word.lower() and having frequency equal to 94 in train set; it might mean that at least our classifier added more weight for features of the type "the word's context" than for the word itself.
+-maybe we can make a gazetteer by taking values of word.lower() which are above certain threshold?
+Negative impacts:
+-word.isupper() and word.istitle() features performed predictably well: great signal for our model that this object is almost definitely a NE of some kind.
+-other features again got us an impression that the model is overfitted to a certain degree
+
+====================================
+2.Data
+====================================
+
+Top positive:
+Top positive:
+7.654967 O        word.lower():minister
+6.195538 I-LOC    +1:word.lower():1996-08-26
+5.835295 I-LOC    +1:word.lower():1996-08-27
+5.805113 I-ORG    -1:word.lower():v
+5.701327 I-LOC    +1:word.lower():1996-08-25
+5.563670 I-LOC    +1:word.lower():1996-08-23
+5.552917 I-PER    word.lower():ata-ur-rehman
+5.535139 I-MISC   word.lower():frenchman
+5.494959 I-LOC    +1:word.lower():1996-08-28
+5.462016 I-LOC    -1:word.lower():wisc
+5.448581 I-PER    word.lower():clinton
+5.436887 I-LOC    -1:word.lower():colo
+5.391063 O        word[-3:]:day
+5.383426 I-MISC   word.lower():german
+5.198453 I-LOC    +1:word.lower():1996-08-29
+5.190330 I-ORG    +1:word.lower():inc.
+5.155579 I-LOC    +1:word.lower():1996-08-24
+5.093899 I-LOC    word.lower():france
+5.029832 I-ORG    word.lower():senate
+4.935788 I-MISC   word.lower():dutch
+4.828046 I-MISC   word.lower():briton
+4.818795 O        word.lower():chairman
+4.721546 I-MISC   word.lower():dtb-bund-future
+4.687812 I-LOC    word.lower():england
+4.647529 I-LOC    word.lower():vatican
+4.635148 I-PER    word.lower():stenning
+4.601349 I-LOC    word.lower():chester-le-street
+4.598421 I-LOC    word.lower():beijing
+4.598329 O        word.lower():june
+4.590836 I-ORG    word.lower():sungard
+
+Top negative:
+-2.226141 O        word[-3:]:eld
+-2.228474 O        -1:word.lower():200
+-2.232701 I-PER    word[-3:]:can
+-2.253126 O        -1:word.lower():saint
+-2.260233 O        +1:word.lower():india
+-2.278391 O        +1:word.lower():restaurant
+-2.337500 O        +1:word.lower():welfare
+-2.343058 O        word[-3:]:860
+-2.358501 O        -1:word.lower():interior
+-2.381204 O        -1:word.lower():hold
+-2.396127 O        +1:word.lower():netherlands
+-2.399431 O        -1:word.lower():lady
+-2.409326 O        -1:word.lower():people
+-2.433927 I-PER    word[-3:]:ion
+-2.451685 O        -1:word.lower():central
+-2.502000 O        +1:word.lower():radio
+-2.520532 O        -1:word.lower():diario
+-2.548749 O        word[-2:]:TO
+-2.595771 O        word[-2:]:AN
+-2.716445 O        word[-2:]:na
+-2.740935 I-MISC   -1:word.lower():french
+-2.954244 O        -1:word.lower():moody
+-2.984350 O        +1:word.lower():arose
+-3.065962 O        word.isupper()
+-3.090731 O        +1:word.lower():d.c.
+-3.245971 O        -1:word.lower():cdu
+-3.349293 O        -1:word.lower():queen
+-3.366365 O        -1:word.lower():beat
+-3.868368 O        -1:word.lower():lloyd
+-5.024452 O        word.istitle()
+
+====================================
+3.Conclusions
+====================================
+
+1)let's add some other features:
+- let's add word's mask/shape (like the one that's in the list of "typical features" in the presentation you shared with us on Github course page but making a distinction not only for capital/not_capital letters, but also for digits)
+- let's try to catch punctuation in a token (certain types: f.e., '-' and '.' are the ones that came to my mind immediately)
+- let's check if our word is in a stopwords list
+2) Maybe if we regularize CRF more, only features which are generic will remain, whereas all the specific tokens will go. It could be achieved by adding an extra boost to L1 regularization (c1 parameter) because coefficients of most features should be driven to zero. Though I think it might make our model's performance worse.
